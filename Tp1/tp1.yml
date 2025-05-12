@@ -12,11 +12,11 @@
         state: latest
         update_cache: true
 
-    - name: Start service httpd, if not started
+    - name: Start service apache2, if not started
       ansible.builtin.service:
         name: apache2
         state: started          
 
     - name: Check that you can connect (GET) to a page and it returns a status 200
       ansible.builtin.uri:
-        url: http://10.10.10.112/         
+        url: "http://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}/"

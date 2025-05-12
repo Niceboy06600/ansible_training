@@ -1,0 +1,22 @@
+---
+- name: install apache2
+  hosts: all
+  user: root
+  become: true
+
+  tasks:
+    - name: install apache
+      ansible.builtin.apt:
+        pkg:
+          - apache2
+        state: latest
+        update_cache: true
+
+    - name: Start service httpd, if not started
+      ansible.builtin.service:
+        name: apache2
+        state: started          
+
+    - name: Check that you can connect (GET) to a page and it returns a status 200
+      ansible.builtin.uri:
+        url: http://10.10.10.112/         

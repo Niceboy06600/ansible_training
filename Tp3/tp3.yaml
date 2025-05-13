@@ -1,0 +1,12 @@
+---
+- name: install apache2
+  hosts: all
+  user: root
+  become: true
+
+  vars:
+    docker_users:
+    - ambient-user
+
+  roles:
+    - geerlingguy.docker
